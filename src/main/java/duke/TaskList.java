@@ -1,11 +1,13 @@
-package duke; /**
+package duke;
+
+/**
  * Encapsulates a TaskList object, which contains the task list,
  * and has operations to add/delete/done tasks in the list.
  */
 
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     /** 1 attribute.
      * list represents the task list.
@@ -68,8 +70,7 @@ class TaskList {
      * @param isDone true if the task is done, or false otherwise.
      */
     void addTodo(String activityName, boolean isDone) {
-        Task newTask = new Todo(activityName,isDone
-        );
+        Task newTask = new Todo(activityName,isDone);
         addAndPrint(newTask);
     }
 
@@ -100,8 +101,6 @@ class TaskList {
      * @param idx integer that represents the index of the task in the command.
      */
     void doneTask(int idx) {
-        assert idx >= 1 && idx <= list.size(): "Invalid index input";
-
         list.get(idx - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done: \n  "
                 + list.get(idx - 1));
@@ -112,8 +111,6 @@ class TaskList {
      * @param idx integer that represents the index of the task in the command.
      */
     void deleteTask(int idx) {
-        assert idx >= 1 && idx <= list.size(): "Invalid index input";
-
         Task removed = list.remove(idx - 1);
         System.out.println("Noted. I've removed this task: \n  " + removed
                 + "\nNow you have " + list.size() + " tasks in the list.");

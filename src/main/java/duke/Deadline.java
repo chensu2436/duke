@@ -1,4 +1,6 @@
-package duke; /**
+package duke;
+
+/**
  * Encapsulates a Deadline object that inherits from Task class and
  * stores task name, status and deadline time.
  */
@@ -23,7 +25,7 @@ class Deadline extends Task {
      * @param isDone true if the task is done, or false otherwise.
      * @param deadline String representation of deadline time of the task.
      */
-    public Deadline(String taskName, boolean isDone, String deadline) {
+    Deadline(String taskName, boolean isDone, String deadline) {
         super(taskName, isDone);
         this.deadline  = deadline;
     }
