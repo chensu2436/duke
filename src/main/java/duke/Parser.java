@@ -3,7 +3,7 @@ package duke;
 /**
  * Encapsulates a Parser object to deals with making sense of the user command.
  */
-class Parser {
+public class Parser {
 
     /** 2 attribute.
      * fullCommand represents the String of input from the user.

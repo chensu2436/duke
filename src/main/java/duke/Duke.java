@@ -1,4 +1,6 @@
-package duke; /**
+package duke;
+
+/**
  * This program reads in command, adds new tasks into the task lists, changes the task
  * status when it is done, and delete the tast according to the command.
  */
@@ -6,15 +8,14 @@ package duke; /**
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private CommandGenerator cg = new CommandGenerator();
     private Scanner sc = new Scanner(System.in);
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -62,48 +64,8 @@ public class Duke extends Application {
         while (!fullCommand.equals("bye")) {
 
             try {
-                Parser parser = new Parser(fullCommand);
-                boolean valid = parser.checkValidity();
-
-                // Proceed only if the full command is valid.
-                if (valid) {
-                    String commandType = parser.getCommandType();
-
-                    // Operate according to the command type.
-                    switch (commandType) {
-                    case "list":
-                        tasks.showTasks();
-                        break;
-                    case "done":
-                        tasks.doneTask(parser.getIndex());
-                        storage.updateFile(tasks);
-                        break;
-                    case "delete":
-                        tasks.deleteTask(parser.getIndex());
-                        storage.updateFile(tasks);
-                        break;
-                    case "find":
-                        tasks.findTask(parser.getKeyword());
-                        break;
-                    case "todo":
-                        tasks.addTodo(parser.getActivityNameWithoutTime(),
-                                false);
-                        storage.updateFile(tasks);
-                        break;
-                    case "deadline":
-                        tasks.addDeadline(parser.getActivityNameWithTime(),
-                                parser.getDeadline(), false);
-                        storage.updateFile(tasks);
-                        break;
-                    case "event":
-                        tasks.addEvent(parser.getActivityNameWithTime(),
-                                parser.getTime(), false);
-                        storage.updateFile(tasks);
-                        break;
-                    default:
-                        assert false : commandType;
-                    }
-                }
+                Command command = cg.generateCommand(fullCommand);
+                command.execute(tasks, storage);
             } catch (DukeException | IOException ex) {
                 System.out.println(ex.getMessage());
             }

@@ -1,4 +1,6 @@
-package duke; /**
+package duke;
+
+/**
  * Encapsulates aa Event object that inherits from Task class and
  * stores task name, status and event time.
  */
@@ -23,7 +25,7 @@ class Event extends Task {
      * @param isDone true if the task is done, or false otherwise.
      * @param time String representation of event time.
      */
-    public Event(String taskName, boolean isDone, String time) {
+    Event(String taskName, boolean isDone, String time) {
         super(taskName, isDone);
         this.time = time;
     }

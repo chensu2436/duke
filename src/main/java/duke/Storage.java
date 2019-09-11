@@ -1,4 +1,6 @@
-package duke; /**
+package duke;
+
+/**
  * Encapsulates a Storage object to deal with loading tasks from the file
  * and saving tasks in the file.
  */
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
 
     /** 1 attribute.
      * filePath represents a string of file path of the file that stores
